@@ -1,5 +1,8 @@
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+
+        DataCorrectness userOne = new DataCorrectness ();
+        DataCorrectness.data("uhfurhy_999", "", "ofjij_666");
+
     }
 }
