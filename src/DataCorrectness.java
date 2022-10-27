@@ -29,19 +29,15 @@ public class DataCorrectness {
     public static void data(String login, String password, String confirmPassword) throws WrongLoginException, WrongPasswordException {
 
         try {
-            verification(login);
+            verificationLogin(login);
         } catch (WrongLoginException e) {
-            System.out.println("Произошла ошибка");
-            System.out.println(e.getMessage());
-        } finally {
-            System.out.println("");
+            System.out.println("Произошла ошибка c логином");
         }
 
         try {
-            verification(password);
+            verificationPassword(password);
         } catch (WrongPasswordException e) {
-            System.out.println("Произошла ошибка");
-            System.out.println(e.getMessage());
+            System.out.println("Произошла ошибка с паролем");
         }
 
         if (password.equals(confirmPassword)) {
@@ -51,23 +47,36 @@ public class DataCorrectness {
         }
     }
 
-    public static boolean verification(String word) {
+    public static void verificationLogin(String word) throws WrongLoginException {
         if (word.length() > 1 && word.length() < 20 && !word.isEmpty() && word != null) {
-
             char[] log = word.toCharArray();
             for (char symbol : log) {
-                if (Character.isAlphabetic(symbol) && Character.isDigit(symbol) && symbol == '_') {
-                    System.out.println(symbol);
+                if (Character.isAlphabetic(symbol) || Character.isDigit(symbol) || symbol == '_') {
+                    System.out.print(symbol);
                 } else {
-                    return false;
+                    throw new WrongLoginException();
                 }
             }
         } else {
-            return false;
+            throw new WrongLoginException();
         }
-        return true;
+        System.out.println();
     }
 
+    public static void verificationPassword(String word) throws WrongPasswordException {
+        if (word.length() > 1 && word.length() < 20 && !word.isEmpty() && word != null) {
+            char[] log = word.toCharArray();
+            for (char symbol : log) {
+                if (Character.isAlphabetic(symbol) || Character.isDigit(symbol) || symbol == '_') {
+                    System.out.print(symbol);
+                } else {
+                    throw new WrongPasswordException();
+                }
+            }
+        } else {
+            throw new WrongPasswordException();
+        } System.out.println();
+    }
 
 }
 
